@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use strict';
 const client = 
 module.exports = function(server) {
@@ -14,3 +15,6 @@ module.exports = function(server) {
 
   });
 };
+=======
+
+>>>>>>> 53c7aa1c86c0bdf76d1df01df4963fe414769a83
