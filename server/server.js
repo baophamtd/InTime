@@ -4,6 +4,7 @@ var loopback = require('loopback');
 var boot = require('loopback-boot');
 
 var app = module.exports = loopback();
+const EmailController = require('./email/EmailController');
 
 app.start = function() {
   // start the web server
@@ -15,8 +16,48 @@ app.start = function() {
       var explorerPath = app.get('loopback-component-explorer').mountPath;
       console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
     }
+
+    //SendEmails
+    app.post('/email', EmailController.sendEmails(req, res));
   });
 };
+
+var SparkPost = require('sparkpost');
+var client = new SparkPost(process.env.SPARKPOST_API_KEY);
+
+
+
+
+app.get('/hello', function(req, res) {
+  res.send("Hello world")
+})
+
+app.get('/sparkpost', function(req, res) {
+  client.transmissions.send({
+    options: {
+      sandbox: false,
+      start_time: '2017-05-06T17:00:00-07:00'
+    },
+    content: {
+      from: 'mail@mail.intimeio.online',
+      subject: 'Check the time! 5pm?',
+      html:'<html><body><p>Hope this emails come in at 5pm</p></body></html>'
+    },
+    recipients: [
+      {address: process.env.GOVIND_EMAIL}
+    ]
+  })
+  .then(data => {
+    console.log('Woohoo! You just sent your first mailing!');
+    console.log(data);
+  })
+  .catch(err => {
+    console.log('Whoops! Something went wrong');
+    console.log(err);
+  });
+  res.send("AYEE WE MADE IT")
+})
+
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
