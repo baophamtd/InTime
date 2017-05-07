@@ -23,4 +23,4 @@ function generateTimes(res, emails) {
     */
     return emails;
 }
-module.exports.addTime = addTime;
+module.exports.generateTimes = generateTimes;

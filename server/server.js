@@ -2,9 +2,11 @@
 
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+var SparkPost = require('sparkpost');
+var client = new SparkPost(process.env.SPARKPOST_API_KEY);
 
 var app = module.exports = loopback();
-const EmailController = require('./email/EmailController');
+const EmailController = require('./services/email/EmailController');
 
 app.start = function() {
   // start the web server
@@ -16,17 +18,11 @@ app.start = function() {
       var explorerPath = app.get('loopback-component-explorer').mountPath;
       console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
     }
-
-    //SendEmails
-    app.post('/email', EmailController.sendEmails(req, res));
   });
 };
 
-var SparkPost = require('sparkpost');
-var client = new SparkPost(process.env.SPARKPOST_API_KEY);
-
-
-
+//SendEmails
+app.post('/email', EmailController.sendEmails(req, res));
 
 app.get('/hello', function(req, res) {
   res.send("Hello world")

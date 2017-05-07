@@ -7,7 +7,7 @@ const sendEmails = function(req, res) {
     let contents = req.body.contents;
     
     //Get all of the customers by email
-    let emails = app.Model.getCustomers(email);
+    let emails = app.dataSource.mongo.connector().query({Customers : { clientID : email }});;
 
     //Manipulate the returned JSON object compute the time for each email
     let timed = TimeService.generateTimes(emails);
