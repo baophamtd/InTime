@@ -2,7 +2,7 @@
   "name": "client",
   "plural": "clients",
   "base": "PersistedModel",
-  "idInjection": true,
+  "idInjection": false,
   "options": {
     "validateUpsert": true
   },
@@ -17,6 +17,10 @@
     },
     "defaultPreference": {
       "type": "date",
+      "required": true
+    },
+    "id": {
+      "type": "string",
       "required": true
     }
   },

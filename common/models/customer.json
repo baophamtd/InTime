@@ -2,7 +2,7 @@
   "name": "customer",
   "plural": "customers",
   "base": "PersistedModel",
-  "idInjection": true,
+  "idInjection": false,
   "options": {
     "validateUpsert": true
   },
@@ -13,6 +13,10 @@
     },
     "availableTime": {
       "type": "date",
+      "required": true
+    },
+    "clientID": {
+      "type": "string",
       "required": true
     }
   },
