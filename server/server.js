@@ -2,11 +2,12 @@
 
 var loopback = require('loopback');
 var boot = require('loopback-boot');
-var SparkPost = require('sparkpost');
-var client = new SparkPost(process.env.SPARKPOST_API_KEY);
+var bodyParser = require('body-parser');
 
 var app = module.exports = loopback();
 const EmailController = require('./services/email/EmailController');
+
+
 
 app.start = function() {
   // start the web server
@@ -19,17 +20,23 @@ app.start = function() {
       console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
     }
   });
+  
 };
 
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
+
 //SendEmails
-app.post('/email', EmailController.sendEmails(req, res));
+app.post('/email', EmailController.sendEmails);
 
 app.get('/hello', function(req, res) {
   res.send("Hello world")
 })
 
 app.get('/sparkpost', function(req, res) {
-  client.transmissions.send({
+  sparkPostClient.transmissions.send({
     options: {
       sandbox: false,
       start_time: '2017-05-06T17:00:00-07:00'
@@ -52,8 +59,7 @@ app.get('/sparkpost', function(req, res) {
     console.log(err);
   });
   res.send("AYEE WE MADE IT")
-})
-
+});
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
