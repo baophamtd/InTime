@@ -58,8 +58,6 @@ app.get('/sparkpost', function(req, res) {
     console.log('Whoops! Something went wrong');
     console.log(err);
   });
-  res.send("AYEE WE MADE IT")
-});
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
