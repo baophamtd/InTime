@@ -54,6 +54,9 @@ app.get('/sparkpost', function(req, res) {
   res.send("AYEE WE MADE IT")
 })
 
+// app.get('/', function(req, res) {
+//   res.render('/client/index.html');
+// })
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
