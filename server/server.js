@@ -19,8 +19,6 @@ app.start = function() {
 
     //SendEmails
     app.post('/email', EmailController.sendEmails(req, res));
-
-
   });
 };
 

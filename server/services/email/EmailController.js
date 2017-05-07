@@ -4,6 +4,7 @@ const TimeService = require('../time/TimeService');
 
 const sendEmails = function(req, res) {
     let email = req.body.email;
+    let contents = req.body.contents;
     
     //Get all of the customers by email
     let emails = app.Model.getCustomers(email);
