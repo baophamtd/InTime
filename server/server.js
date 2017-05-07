@@ -4,6 +4,7 @@ var loopback = require('loopback');
 var boot = require('loopback-boot');
 
 var app = module.exports = loopback();
+const EmailController = require('./email/EmailController');
 
 app.start = function() {
   // start the web server
@@ -15,6 +16,11 @@ app.start = function() {
       var explorerPath = app.get('loopback-component-explorer').mountPath;
       console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
     }
+
+    //SendEmails
+    app.post('/email', EmailController.sendEmails(req, res));
+
+
   });
 };
 
