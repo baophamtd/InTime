@@ -1,5 +1,21 @@
 'use strict';
 
+const calendar = {
+  "calendars": {
+      "errors": [
+        {
+          "domain": string,
+          "reason": string
+        }
+      ],
+      "busy": [
+        {
+          "start": "11:00:00",
+          "end": datetime
+        }
+      ]
+    }
+};
 /*
     emails = [
         "test@test.com",
