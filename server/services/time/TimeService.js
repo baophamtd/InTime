@@ -1,5 +1,5 @@
 'use strict';
-
+const string = "";
 const calendar = {
   "calendars": {
       "errors": [
@@ -11,7 +11,7 @@ const calendar = {
       "busy": [
         {
           "start": "11:00:00",
-          "end": datetime
+          "end": ""
         }
       ]
     }
